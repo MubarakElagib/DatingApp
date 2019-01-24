@@ -98,5 +98,25 @@ namespace DatingApp.API.Controllers
         return BadRequest("Cloud not Add the photo");
     }
 
+
+   [HttpPost("{id}/setMain")]
+   public async Task<IActionResult> SetMainPhoto(int userId, int id)
+   {
+       if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+        var user = await _repo.GetUser(userId);
+
+        if(!user.Photos.Any(p => p.Id == id))
+            return Unauthorized();
+            
+        var photoFromRepo = await _repo.GetPhoto(id);
+
+        if(photoFromRepo.IsMain)
+            return BadRequest("This is already the main photo");
+
+        
+   }
+
 }
 }
