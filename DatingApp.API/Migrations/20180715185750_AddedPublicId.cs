@@ -2,7 +2,7 @@
 
 namespace DatingApp.API.Migrations
 {
-    public partial class addpublicid : Migration
+    public partial class AddedPublicId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
