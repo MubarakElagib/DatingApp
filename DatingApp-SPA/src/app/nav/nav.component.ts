@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   photoUrl: string;
 
   constructor(public authService: AuthService, private alertify: AlertifyService,
-              private router: Router) { }
+      private router: Router) { }
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
@@ -26,14 +26,15 @@ export class NavComponent implements OnInit {
       this.alertify.success('Logged in successfully');
       this.loginForm.reset();
     }, error => {
-      this.alertify.error('Failed to login');
+      this.alertify.error(error);
     }, () => {
       this.router.navigate(['/members']);
     });
   }
 
   loggedIn() {
-   return this.authService.loggedIn();
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
   logout() {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(user.user));
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
-         this.changeMemberPhoto(this.currentUser.photoUrl);
+          this.changeMemberPhoto(this.currentUser.photoUrl);
         }
       })
     );
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   loggedIn() {
-       const token = localStorage.getItem('token');
-       return !this.jwtHelper.isTokenExpired(token);
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }
